@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:music/core/theme/app_pallete.dart';
-import 'package:music/features/auth/repositories/auth_remote_repository.dart';
+import 'package:music/core/utils.dart';
+import 'package:music/core/widgets/loader.dart';
 import 'package:music/features/auth/view/pages/signup_page.dart';
-import 'package:music/features/auth/view/widgets/custom_form_field.dart';
+import 'package:music/core/widgets/custom_form_field.dart';
 import 'package:music/features/auth/view/widgets/gradinet_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:music/features/auth/viewmodel/auth_viewmodel.dart';
+import 'package:music/features/home/view/pages/home_page.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
 
   final emailContorller = TextEditingController();
   final passwordContorller = TextEditingController();
@@ -29,9 +33,36 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(authViewmodelProvider.select(
+        (val) => val?.isLoading == true
+      )
+    );
+
+    ref.listen(
+      authViewmodelProvider,
+      (_,next){
+        next?.when(
+          data: (data){
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => const HomePage()),
+              (_) => false
+            );
+          }, 
+          error: (error, st){
+            showSnackBar(
+              context, 
+              error.toString()
+            );
+          }, 
+          loading: (){}
+        );
+      }
+    );
+
     return Scaffold(
       appBar: AppBar(),
-      body: Form(
+      body: isLoading ? const Loader() : Form(
         key: formKey,
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -59,10 +90,13 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20,),
               GradinetButton(
                 onTap: () async {
-                  await AuthRemoteRepository().login(
-                    email: emailContorller.text, 
-                    password: passwordContorller.text
-                  );
+                  if(formKey.currentState!.validate()){
+                    await ref.read(authViewmodelProvider.notifier).loginUser(
+                      email: emailContorller.text, password: passwordContorller.text
+                    );
+                  } else {
+                    showSnackBar(context, 'Missing Fields!');
+                  }
                 },
                 buttonText: 'Log In',
               ),
