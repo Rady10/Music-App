@@ -12,9 +12,9 @@ from pydantic_schemas.favorite_song import FavoriteSong
 router = APIRouter()
 
 cloudinary.config( 
-    cloud_name = "dnpweqtiw", 
-    api_key = "528252838717467", 
-    api_secret = "Gh1ppFvsxY8JF4l3kwlfMpkYT7s",
+    cloud_name = "add yours here", 
+    api_key = "add yours here", 
+    api_secret = "add yours here",
     secure=True
 )
 
