@@ -76,7 +76,7 @@ class LibraryPage extends ConsumerWidget {
                           GestureDetector(
                             onTap: (){
                               ref.read(authLocalRepositoryProvider).clear();
-                              ref.read(currentSongNotifierProvider.notifier).playAndPause();
+                              ref.read(currentSongNotifierProvider.notifier).terminate();
                               ref.read(homeLocalRepositoryProvider).clearBox();
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const LoginPage()));
                             },

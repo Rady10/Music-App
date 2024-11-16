@@ -65,4 +65,8 @@ class CurrentSongNotifier extends _$CurrentSongNotifier{
     state = state?.copyWith(color: state?.color);
   }
 
+  void terminate(){
+    audioPlayer.dispose();
+  }
+
 }
