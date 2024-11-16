@@ -125,7 +125,7 @@ class SearchPage extends ConsumerWidget {
                                       genre.name,
                                       style: const TextStyle(
                                         color: Pallete.whiteColor,
-                                        fontSize: 20,
+                                        fontSize: 28,
                                         fontWeight: FontWeight.bold
                                       ),
                                     ),

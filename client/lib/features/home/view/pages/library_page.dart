@@ -7,6 +7,7 @@ import 'package:music/core/widgets/loader.dart';
 import 'package:music/features/auth/repositories/auth_local_repository.dart';
 import 'package:music/features/auth/view/pages/login_page.dart';
 import 'package:music/features/auth/viewmodel/auth_viewmodel.dart';
+import 'package:music/features/home/repositories/home_local_repository.dart';
 import 'package:music/features/home/view/pages/upload_song_page.dart';
 import 'package:music/features/home/viewmodel/home_viewmodel.dart';
 
@@ -76,6 +77,7 @@ class LibraryPage extends ConsumerWidget {
                             onTap: (){
                               ref.read(authLocalRepositoryProvider).clear();
                               ref.read(currentSongNotifierProvider.notifier).playAndPause();
+                              ref.read(homeLocalRepositoryProvider).clearBox();
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const LoginPage()));
                             },
                             child: Container(

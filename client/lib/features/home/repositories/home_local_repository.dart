@@ -26,5 +26,8 @@ class HomeLocalRepository{
     }
     return songs;
   }
+  void clearBox(){
+    box.clear();
+  }
 
 }

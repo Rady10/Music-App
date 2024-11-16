@@ -107,7 +107,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 const SizedBox(height: 20,),
                 GestureDetector(
                   onTap: (){
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (BuildContext context) => const SignupPage())
                     );
                   },

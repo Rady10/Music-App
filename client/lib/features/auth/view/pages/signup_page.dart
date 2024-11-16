@@ -116,7 +116,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   const LoginPage(),

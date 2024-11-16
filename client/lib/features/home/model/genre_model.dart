@@ -41,7 +41,7 @@ class GenreModel {
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       color: map['color'] ?? '',
-      url: map['url'] ?? '',
+      url: map['url']?? '',
     );
   }
 
