@@ -26,6 +26,10 @@ class AuthViewmodel extends _$AuthViewmodel{
     await _authLocalRepository.init();
   }
 
+  Future<void> logOut() async{
+    await _authLocalRepository.clear();
+  }
+
   Future<void> signUp({
     required String name,
     required String email,

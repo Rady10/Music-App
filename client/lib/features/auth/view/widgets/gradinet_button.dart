@@ -11,11 +11,10 @@ class GradinetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           colors: [
-            Pallete.gradient1,
-            Pallete.gradient2,
-            Pallete.gradient3
+            Colors.green.withOpacity(0.5),
+            Colors.greenAccent.withOpacity(0.7),
           ]
         ),
         borderRadius: BorderRadius.circular(10)

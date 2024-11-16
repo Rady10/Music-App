@@ -32,113 +32,114 @@ class _SignupPageState extends ConsumerState<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authViewmodelProvider.select(
-        (val) => val?.isLoading == true
-      )
-    );
-    ref.listen(
-      authViewmodelProvider, 
-      (_, next) {
-        next?.when(
-          data: (data){
-            showSnackBar(
-              context, 
-              'Account Created Successfuly! Please Login.'
-            );
+    final isLoading = ref
+        .watch(authViewmodelProvider.select((val) => val?.isLoading == true));
+    ref.listen(authViewmodelProvider, (_, next) {
+      next?.when(
+          data: (data) {
+            showSnackBar(context, 'Account Created Successfuly! Please Login.');
             Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (BuildContext context) => const LoginPage())
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => const LoginPage(),
+              ),
             );
-          }, 
-          error: (error, st){
-            showSnackBar(
-              context, 
-              error.toString()
-            );
-          }, 
-          loading: (){}
-        );
-      }
-    );
+          },
+          error: (error, st) {
+            showSnackBar(context, error.toString());
+          },
+          loading: () {});
+    });
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Pallete.backgroundColor,
+      ),
       body: isLoading
           ? const Loader()
           : Padding(
               padding: const EdgeInsets.all(15),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Sign Up.',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.15,),
+                      const Text(
+                        'Sign Up.',
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    CustomFormField(
-                      hintText: 'Name',
-                      controller: nameContorller,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    CustomFormField(
-                      hintText: 'Email',
-                      controller: emailContorller,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    CustomFormField(
-                      hintText: 'Password',
-                      controller: passwordContorller,
-                      isObsecure: true,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    GradinetButton(
-                      onTap: () async {
-                        if (formKey.currentState!.validate()) {
-                          await ref.read(authViewmodelProvider.notifier).signUp(
-                              name: nameContorller.text,
-                              email: emailContorller.text,
-                              password: passwordContorller.text);
-                        }else{
-                          showSnackBar(context, 'Missing Fields');
-                        }
-                      },
-                      buttonText: 'Sign Up',
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const LoginPage()));
-                      },
-                      child: RichText(
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      CustomFormField(
+                        hintText: 'Name',
+                        controller: nameContorller,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      CustomFormField(
+                        hintText: 'Email',
+                        controller: emailContorller,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      CustomFormField(
+                        hintText: 'Password',
+                        controller: passwordContorller,
+                        isObsecure: true,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GradinetButton(
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            await ref.read(authViewmodelProvider.notifier).signUp(
+                                name: nameContorller.text,
+                                email: emailContorller.text,
+                                password: passwordContorller.text);
+                          } else {
+                            showSnackBar(context, 'Missing Fields');
+                          }
+                        },
+                        buttonText: 'Sign Up',
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const LoginPage(),
+                            ),
+                          );
+                        },
+                        child: RichText(
                           text: TextSpan(
-                              text: 'Already have an account?  ',
-                              style: Theme.of(context).textTheme.titleMedium,
-                              children: const [
-                            TextSpan(
+                            text: 'Already have an account?  ',
+                            style: Theme.of(context).textTheme.titleMedium,
+                            children: const [
+                              TextSpan(
                                 text: 'Sign in',
                                 style: TextStyle(
-                                    color: Pallete.gradient3,
-                                    fontWeight: FontWeight.bold))
-                          ])),
-                    ),
-                  ],
+                                    color: Colors.greenAccent,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

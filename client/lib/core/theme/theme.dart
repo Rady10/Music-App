@@ -13,7 +13,7 @@ class AppTheme{
     scaffoldBackgroundColor: Pallete.backgroundColor,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(27),
-      focusedBorder: _border(Pallete.gradient2),
+      focusedBorder: _border(Colors.greenAccent.withOpacity(0.2)),
       enabledBorder: _border(Pallete.borderColor),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(

@@ -61,71 +61,76 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
 
     return Scaffold(
-      appBar: AppBar(),
-      body: isLoading ? const Loader() : Form(
-        key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Sign In.',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold
+      appBar: AppBar(
+        backgroundColor: Pallete.backgroundColor,
+      ),
+      body: isLoading ? const Loader() : SingleChildScrollView(
+        child: Form(
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
+                const Text(
+                  'Sign In.',
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30,),
-              CustomFormField(
-                hintText: 'Email', 
-                controller: emailContorller
-              ),
-              const SizedBox(height: 15,),
-              CustomFormField(
-                hintText: 'Password', 
-                controller: passwordContorller,
-                isObsecure: true,
-              ),
-              const SizedBox(height: 20,),
-              GradinetButton(
-                onTap: () async {
-                  if(formKey.currentState!.validate()){
-                    await ref.read(authViewmodelProvider.notifier).loginUser(
-                      email: emailContorller.text, password: passwordContorller.text
+                const SizedBox(height: 30,),
+                CustomFormField(
+                  hintText: 'Email', 
+                  controller: emailContorller
+                ),
+                const SizedBox(height: 15,),
+                CustomFormField(
+                  hintText: 'Password', 
+                  controller: passwordContorller,
+                  isObsecure: true,
+                ),
+                const SizedBox(height: 20,),
+                GradinetButton(
+                  onTap: () async {
+                    if(formKey.currentState!.validate()){
+                      await ref.read(authViewmodelProvider.notifier).loginUser(
+                        email: emailContorller.text, password: passwordContorller.text
+                      );
+                    } else {
+                      showSnackBar(context, 'Missing Fields!');
+                    }
+                  },
+                  buttonText: 'Log In',
+                ),
+                const SizedBox(height: 20,),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (BuildContext context) => const SignupPage())
                     );
-                  } else {
-                    showSnackBar(context, 'Missing Fields!');
-                  }
-                },
-                buttonText: 'Log In',
-              ),
-              const SizedBox(height: 20,),
-              GestureDetector(
-                onTap: (){
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (BuildContext context) => const SignupPage())
-                  );
-                },
-                child: RichText(
-                  text: TextSpan(
-                    text: "Don't have an account?  ",
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: const [
-                      TextSpan(
-                        text: 'Sign Up',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Pallete.gradient3
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Don't have an account?  ",
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: const [
+                        TextSpan(
+                          text: 'Sign Up',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.greenAccent
+                          )
                         )
-                      )
-                    ]
-                  )
+                      ]
+                    )
+                  ),
                 ),
-              ),
-            ],
-          ),
-        )
+              ],
+            ),
+          )
+        ),
       ),
     );
   }

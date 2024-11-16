@@ -33,9 +33,9 @@ class FavSongModel {
 
   factory FavSongModel.fromMap(Map<String, dynamic> map) {
     return FavSongModel(
-      id: map['id'] as String,
-      song_id: map['song_id'] as String,
-      user_id: map['user_id'] as String,
+      id: map['id'] ?? '',
+      song_id: map['song_id'] ?? '',
+      user_id: map['user_id'] ?? '',
     );
   }
 

@@ -52,7 +52,7 @@ class UserModel {
       email: map['email'] ?? '',
       id: map['id'] ?? '',
       token: map['token'] ?? '',
-      favorites: List<FavSongModel>.from((map['favorites'] ?? '').map((x) => FavSongModel.fromMap(x as Map<String,dynamic>),),),
+      favorites: List<FavSongModel>.from((map['favorites'] ?? []).map((x) => FavSongModel.fromMap(x as Map<String,dynamic>),),),
     );
   }
 

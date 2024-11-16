@@ -86,6 +86,7 @@ class MusicSlap extends ConsumerWidget {
                     IconButton(
                       onPressed: () async{
                        await ref.read(homeViewmodelProvider.notifier).favoriteSong(songId: currentSong.id);
+                       
                       }, 
                       icon: Icon(
                         userFavorites.where((fav) => fav.song_id == currentSong.id).toList().isNotEmpty

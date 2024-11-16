@@ -51,7 +51,6 @@ Future<List<SongModel>> getFavoriteSongs(GetFavoriteSongsRef ref) async{
   };
 }
 
-
 @riverpod
 class HomeViewmodel extends _$HomeViewmodel{
   late HomeRepository _homeRepository;
@@ -116,7 +115,7 @@ class HomeViewmodel extends _$HomeViewmodel{
     );
     final val = switch(res){
       Left(value: final l) => state = AsyncValue.error(l.message, StackTrace.current),
-      Right(value: final r) => state = _favSongSuccess(r, songId)
+      Right(value: final r) => state = AsyncValue.data(r)
     };
     print(val);
   }
@@ -125,27 +124,6 @@ class HomeViewmodel extends _$HomeViewmodel{
     return _homeLocalRepository.loadSongs(); 
   }
 
-  AsyncValue _favSongSuccess(bool isFavorited, String songId){
-    final userNotifier = ref.read(currentUserNotifierProvider.notifier);
-    if(isFavorited){
-      userNotifier.addUser(
-        ref.read(currentUserNotifierProvider)!.copyWith(
-          favorites: [
-            ... ref.read(currentUserNotifierProvider)!.favorites,
-            FavSongModel(id: '', song_id: songId, user_id: '')
-          ],
-        ),
-      );
-    }
-    else{
-      userNotifier.addUser(
-        ref.read(currentUserNotifierProvider)!.copyWith(
-          favorites: ref.read(currentUserNotifierProvider)!.favorites.where((fav)=> fav.song_id != songId).toList()
-        ),
-      );
-    }
-    ref.invalidate(getFavoriteSongsProvider);
-    return state = AsyncValue.data(isFavorited);
-  }
+  
 
 }

@@ -24,4 +24,8 @@ class AuthLocalRepository{
   String? getToken(){
     return _sharedPreferences.getString('x-auth-token');
   }
+
+  Future<void> clear() async{
+    await _sharedPreferences.clear();
+  }
 }

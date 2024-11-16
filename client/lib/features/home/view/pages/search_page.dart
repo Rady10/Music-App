@@ -48,7 +48,6 @@ class SearchPage extends ConsumerWidget {
                     const SizedBox(height: 20,),
                     GestureDetector(
                       onTap: () {
-                        // Navigate to SearchUi while keeping bottom navigation bar visible
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchUi()));
                       },
                       child: Container(
@@ -104,7 +103,6 @@ class SearchPage extends ConsumerWidget {
                               final genre = data[index];
                               return GestureDetector(
                                 onTap: () {
-                                  // Navigate to GenrePage while keeping bottom navigation bar visible
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => GenrePage(

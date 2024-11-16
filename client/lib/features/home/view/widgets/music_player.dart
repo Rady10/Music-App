@@ -89,7 +89,7 @@ class MusicPlayer extends ConsumerWidget {
                             currentSong.name,
                             style: const TextStyle(
                               color: Pallete.whiteColor,
-                              fontSize: 24,
+                              fontSize: 20,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -145,7 +145,7 @@ class MusicPlayer extends ConsumerWidget {
                             child: Slider(
                               value: sliderVal,
                               min: 0.0,
-                              max: 1.00001883877774,
+                              max: 1.000065772165197,
                               onChanged: (val) {
                                 songNotifier.seek(val);
                               },
@@ -180,18 +180,24 @@ class MusicPlayer extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          'assets/images/shuffle.png',
-                          color: Pallete.whiteColor,
+                      GestureDetector(
+                        onTap: (){},
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Image.asset(
+                            'assets/images/shuffle.png',
+                            color: Pallete.whiteColor,
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          'assets/images/previus-song.png',
-                          color: Pallete.whiteColor,
+                      GestureDetector(
+                        onTap: (){},
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Image.asset(
+                            'assets/images/previus-song.png',
+                            color: Pallete.whiteColor,
+                          ),
                         ),
                       ),
                       IconButton(
@@ -206,11 +212,14 @@ class MusicPlayer extends ConsumerWidget {
                         iconSize: 80,
                         color: Pallete.whiteColor,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          'assets/images/next-song.png',
-                          color: Pallete.whiteColor,
+                      GestureDetector(
+                        onTap: (){},
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Image.asset(
+                            'assets/images/next-song.png',
+                            color: Pallete.whiteColor,
+                          ),
                         ),
                       ),
                       GestureDetector(
