@@ -1,7 +1,9 @@
 
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:music/core/providers/current_song_notifier.dart';
+import 'package:music/core/providers/current_user_notifier.dart';
 import 'package:music/core/theme/app_pallete.dart';
 import 'package:music/core/widgets/loader.dart';
 import 'package:music/features/auth/repositories/auth_local_repository.dart';
@@ -16,6 +18,7 @@ class LibraryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(currentUserNotifierProvider);
     return Padding(
       padding: const EdgeInsets.only(top: 50, left: 10),
       child: Column(
@@ -26,9 +29,16 @@ class LibraryPage extends ConsumerWidget {
                 onTap: (){
                   ref.read(authViewmodelProvider.notifier).logOut();
                 },
-                child: const CircleAvatar(
-                  backgroundColor: Pallete.whiteColor,
-                  child: Icon(Icons.person,color: Colors.black,),
+                child: CircleAvatar(
+                  backgroundColor: Colors.greenAccent,
+                  child: Text(
+                    user!.name[0].capitalize,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 30,),

@@ -1,5 +1,7 @@
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:music/core/providers/current_user_notifier.dart';
 import 'package:music/core/theme/app_pallete.dart';
 import 'package:music/core/utils.dart';
 import 'package:music/core/widgets/loader.dart';
@@ -12,6 +14,7 @@ class SearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(currentUserNotifierProvider);
     return Navigator(
       onGenerateRoute: (settings) {
         return MaterialPageRoute(
@@ -23,20 +26,24 @@ class SearchPage extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 0),
+                          padding: const EdgeInsets.only(left: 0),
                           child: CircleAvatar(
-                            backgroundColor: Pallete.whiteColor,
-                            child: Icon(
-                              Icons.person,
-                              color: Pallete.backgroundColor,
-                            ),
+                            backgroundColor: Colors.greenAccent,
+                            child: Text(
+                              currentUser!.name[0].capitalize,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black
+                              ),
+                            )
                           ),
                         ),
-                        SizedBox(width: 20,),
-                        Text(
+                        const SizedBox(width: 20,),
+                        const Text(
                           'Search',
                           style: TextStyle(
                             fontSize: 28,
