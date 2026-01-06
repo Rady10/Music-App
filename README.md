@@ -1,4 +1,4 @@
-# 🎵 Music App - Spotify Clone
+# 🎵 Replay App
 
 A full-stack, cross-platform music streaming application built with **Flutter** and **FastAPI**. This project serves as a modern Spotify clone, featuring a sleek user interface, robust state management, and a high-performance backend.
 
